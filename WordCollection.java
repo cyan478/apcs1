@@ -110,13 +110,14 @@ Part II: AP Questions
     // postcondition: returns the number of occurrences of word in C
     */
 
-public static int occurrences(WordCollection C, String  word){
-    int counter = 0;
-    for (String x : C._collection)
-	if (x.equals(word)){
-	    counter++;	
-	}
-    return counter;
+	public static int occurrences(WordCollection C, String  word){
+		int counter = 0;
+		for (int i = C.indexOf(word); i < C.size(); i++){
+			if (word.equals(C.findKth(i))) 
+				counter++;
+			else break;
+		}
+		return counter;
 }
 
 /*
