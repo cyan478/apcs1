@@ -1,8 +1,8 @@
 /*
-A WordCollection, shown in the class declaration below, stores a group of 
-words, sorted in ascending order. 
+  A WordCollection, shown in the class declaration below, stores a group of 
+  words, sorted in ascending order. 
 
-The collection may store multiple instances of any word. 
+  The collection may store multiple instances of any word. 
 */
 
 import java.util.ArrayList;
@@ -85,57 +85,57 @@ public class WordCollection{
 }
 
 /*
-Part I:
-=======
+  Part I:
+  =======
   i. Implement the constructor WordCollection().                            .
- ii. Implement the insert method. Classify the runtime complexity.
-iii. Implement the overloaded constructor WordCollection(String []).
- iv. Implement the indexOf method. Classify the runtime complexity.
+  ii. Implement the insert method. Classify the runtime complexity.
+  iii. Implement the overloaded constructor WordCollection(String []).
+  iv. Implement the indexOf method. Classify the runtime complexity.
   v. Implement the remove method. Classify the runtime complexity.
 
 
-Part II: AP Questions
-========
+  Part II: AP Questions
+  ========
 
-(a) Write free function occurrences, as started below. occurrences returns the
-    number of times that word appears in WordCollection C. If word is not in C,
-    occurrences should return 0.
+  (a) Write free function occurrences, as started below. occurrences returns the
+  number of times that word appears in WordCollection C. If word is not in C,
+  occurrences should return 0.
     
-    In writing occurrences, you may call any of the member functions of the 
-    WordCollection class.
+  In writing occurrences, you may call any of the member functions of the 
+  WordCollection class.
 
-    Assume that the member functions work as specified.
-    Complete function occurrences below.
-    public static int occurrences(WordCollection C, String  word)
-    // postcondition: returns the number of occurrences of word in C
-    */
+  Assume that the member functions work as specified.
+  Complete function occurrences below.
+  public static int occurrences(WordCollection C, String  word)
+  // postcondition: returns the number of occurrences of word in C
+  */
 
-	public static int occurrences(WordCollection C, String  word){
-		int counter = 0;
-		for (int i = C.indexOf(word); i < C.size(); i++){
-			if (word.equals(C.findKth(i))) 
-				counter++;
-			else break;
-		}
-		return counter;
+public static int occurrences(WordCollection C, String  word){
+    int counter = 0;
+    for (int i = C.indexOf(word); i < C.size(); i++){
+	if (word.equals(C.findKth(i))) 
+	    counter++;
+	else break;
+    }
+    return counter;
 }
 
 /*
 
-(b) Write free function removeDuplicates, as started below. removeDuplicates 
-    removes all but one occurrence of word from C. If word is not in collection
-    C, then removeDuplicates does nothing.
+  (b) Write free function removeDuplicates, as started below. removeDuplicates 
+  removes all but one occurrence of word from C. If word is not in collection
+  C, then removeDuplicates does nothing.
 
 
-In writing removeDuplicates, you may call function occurrences specified in
-part (a). Assume that occurrences works as specified, regardless of what you
-wrote in part (a).
+  In writing removeDuplicates, you may call function occurrences specified in
+  part (a). Assume that occurrences works as specified, regardless of what you
+  wrote in part (a).
 
-Complete function removeDuplicates below.
-	 public static void removeDuplicates(WordCollection C, String word)
-	 // postcondition: if word is present in C, all but one occurrence
-	 //is removed; otherwise, C is unchanged
-*/
+  Complete function removeDuplicates below.
+  public static void removeDuplicates(WordCollection C, String word)
+  // postcondition: if word is present in C, all but one occurrence
+  //is removed; otherwise, C is unchanged
+  */
 
 public static void removeDuplicates(WordCollection C, String word){
     int occur = C.occurrences(C,word);
@@ -147,30 +147,34 @@ public static void removeDuplicates(WordCollection C, String word){
 }
 
 /*
-(c) Write free function mostCommon, as started below. mostCommon returns the
-    word that appears most often in the collection. If there is more than one
-    such word, return any one of them. You may assume that C is not empty.
+  (c) Write free function mostCommon, as started below. mostCommon returns the
+  word that appears most often in the collection. If there is more than one
+  such word, return any one of them. You may assume that C is not empty.
 
-    In writing mostCommon, you may call function occurrences specified in part
-    (a). Assume that occurrences works as specified, regardless of what you
-    wrote in part (a).
+  In writing mostCommon, you may call function occurrences specified in part
+  (a). Assume that occurrences works as specified, regardless of what you
+  wrote in part (a).
 
-    Complete function mostCommon below.
+  Complete function mostCommon below.
  
-    // precondition: C is not empty
-    // postcondition: returns the word that appears most often in C;
-    //if there is more than one such word, returns any one of those words
-    public static String mostCommon( WordCollection  C)
+  // precondition: C is not empty
+  // postcondition: returns the word that appears most often in C;
+  //if there is more than one such word, returns any one of those words
+  public static String mostCommon( WordCollection  C)
 
 */
 
 public static String mostCommon( WordCollection  C){
-    String most = C.findKth(0);
+    int max = 0;
+    int pos = 0; //pos of max
     for (int i = 1; i < C.size(); i++){
-	if (C.occurrence(C, C.indexOf(i)) > C.occurrences(C, C.indexOf(i-0)))
-	    most = C.indexOf(i);
+        int current = occurrences(C,C.findKth(i));
+	if (current > max){
+	    max = current;
+	    pos = i;
+	}
     }
-    return most;
+    return C.findKth(pos);
 }
 
 
